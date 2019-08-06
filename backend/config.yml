@@ -1,0 +1,14 @@
+# 翻译配置文件
+
+app:
+  host: ":8083"
+  debug: true
+
+mysql:
+  dsn: "root:123456@(127.0.0.1:3306)/pre_cartoon_cms?charset=utf8"
+
+redis:
+  maxidle: 50 # 连接池中最大空闲连接数量
+  max_active: 30 # 最大连接数量
+  idle_timeout: 300 # 最大超时时间(s)
+  port: "127.0.0.1:6379"
