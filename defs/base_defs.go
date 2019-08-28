@@ -5,10 +5,8 @@ package defs
 // 引擎定义
 const (
 	Google = 1
-	Baidu = 2
+	Baidu  = 2
 )
 
 // 语言定义
-const (
-
-)
+const ()

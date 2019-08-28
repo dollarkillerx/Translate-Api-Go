@@ -9,8 +9,8 @@ import (
 
 type myconf struct {
 	App struct {
-		Host       string `yaml:"host"`
-		Debug      bool   `yaml:"debug"`
+		Host  string `yaml:"host"`
+		Debug bool   `yaml:"debug"`
 	}
 	Mysql struct {
 		Dsn   string `yaml:"dsn"`
