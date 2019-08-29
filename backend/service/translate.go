@@ -9,6 +9,7 @@ import (
 	"github.com/dollarkillerx/easyutils/clog"
 	"github.com/dollarkillerx/easyutils/httplib"
 	"strings"
+	"time"
 )
 
 // 翻译
@@ -30,10 +31,18 @@ func Translate(tag int,data *defs.Translate) (*defs.TranslateResult, error) {
 		return nil, i
 	}
 
+	a := 0
+
+	ki:
 	bytes, e := httplib.EuUserGet(tagUrl)
 	if e != nil {
-		clog.Println(e.Error())
-		return nil, e
+		a += 1
+		if a < 3 {
+			time.Sleep(time.Second * 1)
+		}else {
+			time.Sleep(time.Second * 10)
+		}
+		goto ki
 	}
 
 	document, i := goquery.NewDocumentFromReader(bytes2.NewBuffer(bytes))
