@@ -21,11 +21,11 @@ func Translate(ctx iris.Context) {
 		data.Sl = "auto"
 	}
 
-	result, err := service.Translate(0,&data)
+	result, err := service.Translate(0, &data)
 
 	if err != nil {
 		ctx.StatusCode(400)
-		ctx.JSON(defs.TranslateResult{Code:400,Msg:""})
+		ctx.JSON(defs.TranslateResult{Code: 400, Msg: ""})
 		return
 	}
 
@@ -45,17 +45,16 @@ func TranslateCn(ctx iris.Context) {
 		data.Sl = "auto"
 	}
 
-	result, err := service.Translate(1,&data)
+	result, err := service.Translate(1, &data)
 
 	if err != nil {
 		ctx.StatusCode(400)
-		ctx.JSON(defs.TranslateResult{Code:400,Msg:""})
+		ctx.JSON(defs.TranslateResult{Code: 400, Msg: ""})
 		return
 	}
 
 	ctx.JSON(result)
 }
-
 
 func DocumentApi(ctx iris.Context) {
 	bytes, e := ioutil.ReadFile("./view/home.html")
@@ -63,6 +62,6 @@ func DocumentApi(ctx iris.Context) {
 		return
 	}
 
-	ctx.Header("content-type","text/html")
+	ctx.Header("content-type", "text/html")
 	ctx.WriteString(string(bytes))
 }

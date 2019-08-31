@@ -7,10 +7,13 @@ import (
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/dollarkillerx/easyutils"
+	"github.com/dollarkillerx/easyutils/clog"
 	"github.com/dollarkillerx/easyutils/httplib"
 	"io/ioutil"
 	"log"
+	"strconv"
 	"strings"
+	"sync"
 	"testing"
 )
 
@@ -20,7 +23,7 @@ func TestTranslate(t *testing.T) {
 		Sl:   "auto",
 		Text: "我的天啊",
 	}
-	result, e := service.Translate(1,&input)
+	result, e := service.Translate(1, &input)
 	if e != nil {
 		t.Log(e.Error())
 		return
@@ -59,4 +62,47 @@ func TestAsl(t *testing.T) {
 
 	log.Println(space)
 
+}
+
+func TestAb(t *testing.T) {
+	tagUrl := "http://localhost:8083/translate_cn?sl=&tl=zh-Ch&text=helo"
+
+	ints := make(chan int, 100)
+	errNum := 0
+
+	wg := sync.WaitGroup{}
+	rw := sync.RWMutex{}
+
+	for i := 0; i <= 10000; i++ {
+		ints <- 1
+		wg.Add(1)
+		go func(i int) {
+			defer func() {
+				<-ints
+				wg.Done()
+			}()
+
+			get := httplib.Get(tagUrl)
+			response, e := get.Response()
+			defer response.Body.Close()
+			if e != nil {
+				panic(e.Error())
+			}
+
+			if response.StatusCode != 200 {
+				clog.Println("http status !200")
+
+				rw.Lock()
+				errNum += 1
+				rw.Unlock()
+
+			} else {
+				log.Println("http ok !   ", i)
+			}
+		}(i)
+	}
+
+	clog.Println("err: " + strconv.Itoa(errNum))
+
+	wg.Wait()
 }

@@ -25,5 +25,5 @@ func router(app *iris.Application) {
 	app.Get("/translate_cn", controller.TranslateCn)
 	app.Post("/translate_cn", controller.TranslateCn)
 
-	app.Get("/",controller.DocumentApi)
+	app.Get("/", controller.DocumentApi)
 }
