@@ -3,6 +3,7 @@ package service
 import (
 	"Translate-Api-Go/defs"
 	bytes2 "bytes"
+	"errors"
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/dollarkillerx/easyutils"
@@ -13,17 +14,16 @@ import (
 )
 
 // 翻译
-func Translate(tag int,data *defs.Translate) (*defs.TranslateResult, error) {
+func Translate(tag int, data *defs.Translate) (*defs.TranslateResult, error) {
 
 	outData := defs.TranslateResult{}
 
 	var url string
 	if tag == 0 {
 		url = fmt.Sprintf("https://translate.google.com/m?hl=%s&sl=%s&q=%s", data.Tl, data.Sl, data.Text)
-	}else {
+	} else {
 		url = fmt.Sprintf("https://translate.google.cn/m?hl=%s&sl=%s&q=%s", data.Tl, data.Sl, data.Text)
 	}
-
 
 	tagUrl, i := easyutils.UrlEncoding(url)
 	if i != nil {
@@ -33,14 +33,14 @@ func Translate(tag int,data *defs.Translate) (*defs.TranslateResult, error) {
 
 	a := 0
 
-	ki:
+ki:
 	bytes, e := httplib.EuUserGet(tagUrl)
 	if e != nil {
 		a += 1
 		if a < 3 {
 			time.Sleep(time.Second * 1)
-		}else {
-			time.Sleep(time.Second * 10)
+		} else {
+			return nil, errors.New("not data")
 		}
 		goto ki
 	}
@@ -58,5 +58,5 @@ func Translate(tag int,data *defs.Translate) (*defs.TranslateResult, error) {
 	outData.Code = 200
 	outData.Msg = space
 
-	return &outData,nil
+	return &outData, nil
 }

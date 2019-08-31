@@ -2,11 +2,14 @@ package router
 
 import (
 	"Translate-Api-Go/backend/controller"
+	"Translate-Api-Go/backend/middleware"
 	"github.com/kataras/iris"
 )
 
 func RegisterRouter() *iris.Application {
 	app := iris.New()
+
+	app.Use(middleware.GlobalAfter)
 
 	// 注册路由
 	router(app)

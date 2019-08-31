@@ -11,6 +11,7 @@ type myconf struct {
 	App struct {
 		Host  string `yaml:"host"`
 		Debug bool   `yaml:"debug"`
+		MaxRequest int `yaml:"max_request"`
 	}
 	Mysql struct {
 		Dsn   string `yaml:"dsn"`

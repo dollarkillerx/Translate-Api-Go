@@ -14,6 +14,7 @@ func Translate(ctx iris.Context) {
 	if err != nil {
 		ctx.StatusCode(200)
 		ctx.JSON(data)
+		return
 	}
 
 	if data.Sl == "" {
@@ -24,7 +25,7 @@ func Translate(ctx iris.Context) {
 
 	if err != nil {
 		ctx.StatusCode(400)
-		ctx.JSON(defs.TranslateResult{})
+		ctx.JSON(defs.TranslateResult{Code:400,Msg:""})
 		return
 	}
 
@@ -48,7 +49,7 @@ func TranslateCn(ctx iris.Context) {
 
 	if err != nil {
 		ctx.StatusCode(400)
-		ctx.JSON(defs.TranslateResult{})
+		ctx.JSON(defs.TranslateResult{Code:400,Msg:""})
 		return
 	}
 
