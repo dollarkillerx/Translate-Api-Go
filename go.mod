@@ -10,7 +10,7 @@ require (
 	github.com/couchbase/go-couchbase v0.0.0-20190808163554-a309852c6932 // indirect
 	github.com/couchbase/gomemcached v0.0.0-20190608153736-7c1f4fd19ef7 // indirect
 	github.com/couchbase/goutils v0.0.0-20190315194238-f9d42b11473b // indirect
-	github.com/dollarkillerx/easyutils v0.0.0-20190824085603-ed3012abf418
+	github.com/dollarkillerx/easyutils v0.0.0-20190918091552-8f2a749c9ed4
 	github.com/edsrzf/mmap-go v1.0.0 // indirect
 	github.com/go-redis/redis v6.15.2+incompatible // indirect
 	github.com/gogo/protobuf v1.2.1 // indirect
