@@ -20,6 +20,12 @@ func Translate(ctx iris.Context) {
 		data.Sl = "auto"
 	}
 
+	if data.Text == "" || data.Tl == "" {
+		ctx.StatusCode(400)
+		ctx.JSON(defs.TranslateResult{Code: 400, Msg: ""})
+		return
+	}
+
 	result, err := service.Translate(0, &data)
 
 	if err != nil {
