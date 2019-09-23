@@ -63,11 +63,9 @@ func TranslateCn(ctx iris.Context) {
 
 func DocumentApi(ctx iris.Context) {
 
-
 	ctx.Header("content-type", "text/html")
 	ctx.WriteString(string(htm))
 }
-
 
 var htm = `<!DOCTYPE html>
 <html lang=zh-CN>

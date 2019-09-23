@@ -39,14 +39,14 @@ func Translate(tag int, data *defs.Translate) (*defs.TranslateResult, error) {
 
 		var bytes []byte
 		var e error
-		for i:=0;i<20;i++ {
+		for i := 0; i < 20; i++ {
 			bytes, e = httplib.EuUserGet(tagUrl)
 			if e == nil {
 				break
-			}else if i<3 {
+			} else if i < 3 {
 				continue
-			}else if i > 3 {
-				return nil,errors.New("not data")
+			} else if i > 3 {
+				return nil, errors.New("not data")
 			}
 		}
 
@@ -59,9 +59,9 @@ func Translate(tag int, data *defs.Translate) (*defs.TranslateResult, error) {
 		text := document.Find("div[class='t0']").Text()
 
 		space := strings.TrimSpace(text)
-		gcache.CacheSet(key,space)
+		gcache.CacheSet(key, space)
 
-		return Translate(tag,data)
+		return Translate(tag, data)
 	}
 
 	space := get.(string)
