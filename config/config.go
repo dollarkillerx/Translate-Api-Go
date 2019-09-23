@@ -1,9 +1,11 @@
 package config
 
 import (
+	"github.com/dollarkillerx/easyutils/clog"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
+	"os"
 	"time"
 )
 
@@ -34,7 +36,9 @@ func init() {
 
 	bytes, e := ioutil.ReadFile("./config.yml")
 	if e != nil {
-		panic(e.Error())
+		clog.PrintWa("请填写配置文件")
+		create_config()
+		os.Exit(0)
 	}
 
 	e = yaml.Unmarshal(bytes, MyConfig)
@@ -46,3 +50,19 @@ func init() {
 		log.Println(MyConfig)
 	}
 }
+
+func create_config() {
+	err := ioutil.WriteFile("config.yml", []byte(conf), 00666)
+	if err != nil {
+		panic(err)
+	}
+}
+
+var conf = `
+# 翻译配置文件
+
+app:
+  host: ":8083"
+  debug: true
+  max_request: 1000
+`

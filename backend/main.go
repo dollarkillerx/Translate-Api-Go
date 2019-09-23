@@ -10,4 +10,5 @@ func main() {
 	app := router.RegisterRouter()
 
 	app.Run(iris.Addr(config.MyConfig.App.Host), iris.WithCharset("UTF-8"))
+
 }
